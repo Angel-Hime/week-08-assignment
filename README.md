@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+DESCRIPTION
 
-## Getting Started
+<!--  -->
 
-First, run the development server:
+REFLECTION
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<!--  -->
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+REQUIREMENTS AND GOALS
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+    🎯 Display all posts on the page, with an option to sort them in ascending or descending order.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+    	- fetch and map
 
-## Learn More
+    	- ascending and descend by date? - sorting with query string.
+    		--> conditional rendering on arrows?
 
-To learn more about Next.js, take a look at the following resources:
+    🎯 Create a SQL schema for a posts table and a comments table, with the comments being connected to the posts table with a foreign key.
+        Please submit your database schema, as is mentioned in the submission instructions.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    	- SQL schema and Foreign Key on comments table
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    🎯 Create a delete button on posts that allows users to delete the cmoment from the database.
 
-## Deploy on Vercel
+    	- client side button using async params for specification of which comment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    	- can be a link to change the params
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    	- can be a form button that deletes on the action
+
+    🎯 Create a form which saves comments to a dedicated comments table, with the comments being connected to the posts table with a foreign key.
+
+    	- server side form
+
+    🎯 Allow users to comment on individual posts in their dynamic routes. Comments should be associated with posts, and have a dynamic route (e.g. /posts/:postid).
+
+    	- route to post, link for post, dynamic route to individual post which shows comments
+
+    🎯 Add a revalidate path when a user creates a post to see it on submission --> you can also redirect them to the posts page.
+
+    	- revalidate the dynamic post link!!!
+    		--> you don't need to redirect after use comments
+    		--> you can show the user that the thing has been posted
+
+    	- REDIRECT IS NOT A REQUIREMENT!
+    		--> redirect to post link if I do a 'add post' only
+
+
+    FORM TO ADD BLOG POSTS
+
+
+    🏹 Implement a select input (or similar mechanism) that allows users to categorise posts during creation, storing them in their own table in the database.
+    Ensure appropriate routing for categories, with endpoints such as /categories and /categories/:id to enable users to browse and interact with posts by category.
+
+    	- checkbox
+    	- need to make
+
+    	- links to categories by id?
+
+
+
+    🏹 Create an edit functionality accessible via /posts/:id/edit, which pre-fills a form for post data. Create a working PUT route to update the post in the database.
+
+    	-
+
+    🏹 Develop an edit comment feature accessible via /posts/:id/comments/:id/edit, which pre-fills a form for comment data. Create a working PUT route to update the comment in the database.
+
+    	-
+
+SOURCES AND ATTRIBUTIONS
+
+The Tech Educators logo is property of Tech Educators Ltd. https://techeducators.co.uk/
+
+The GitHub logo is property of GitHub Inc. https://github.com/
+
+The LinkedIn logo is property of LinkedIn Corporation. https://about.linkedin.com/?trk=homepage-basic_footer-about
