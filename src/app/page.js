@@ -1,4 +1,4 @@
-export default function HomePAge() {
+export default function HomePage() {
   return (
     <>
       {/* nav on every page */}
