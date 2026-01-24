@@ -37,7 +37,7 @@ export default async function dynamicProjectPage({ params, searchParams }) {
   // New comment form
   async function handleSavePostForm(formData) {
     "use server";
-    console.log("Saving post to the database...");
+    console.log("Saving comment to the database...");
 
     const title = formData.get("username");
     const content = formData.get("content");
@@ -46,7 +46,7 @@ export default async function dynamicProjectPage({ params, searchParams }) {
       `INSERT INTO entry_comments (username, comment, entry_id) VALUES ($1, $2, $3)`,
       [title, content, projectId],
     );
-    console.log("Post saved!");
+    console.log("Comment saved!");
 
     revalidatePath(`${entry.entry_id}`);
   }
@@ -67,14 +67,14 @@ export default async function dynamicProjectPage({ params, searchParams }) {
   // if (queryString.sort === "desc") {
   //   comments.sort((a, b) => {
   //     return b.comment_date
-  //       .toLocaleDateString("en-UK")
-  //       .localeCompare(a.comment_date.toLocaleDateString("en-UK"));
+  //       .toLocaleDateString("en-CA")
+  //       .localeCompare(a.comment_date.toLocaleDateString("en-CA"));
   //   });
   // } else if (queryString.sort === "asc") {
   //   comments.sort((a, b) => {
   //     return a.comment_date
-  //       .toLocaleDateString("en-UK")
-  //       .localeCompare(b.comment_date.toLocaleDateString("en-UK"));
+  //       .toLocaleDateString("en-CA")
+  //       .localeCompare(b.comment_date.toLocaleDateString("en-CA"));
   //   });
   // }
 
@@ -83,15 +83,23 @@ export default async function dynamicProjectPage({ params, searchParams }) {
       {/* main image
     content */}
       <h2>{entry.entry_title}</h2>
-      <Image
-        src={entry.screenshot_url}
-        alt={`image showing the web app ${entry.entry_title}`}
-        width={500}
-        height={300}
-      />
+      {entry.screenshot_url ? (
+        <Image
+          src={entry.screenshot_url}
+          alt={`image showing the web app ${entry.entry_title}`}
+          width={500}
+          height={300}
+        />
+      ) : (
+        <h2>
+          {" "}
+          Image not provide, click here to navigate to project{" "}
+          {entry.entry_title}
+        </h2>
+      )}
       <p>{entry.entry_content}</p>
       <p>{entry.entry_date.toLocaleDateString()}</p>
-
+      <Link href={`/projects/${entry.entry_id}/edit`}>Edit Post</Link>
       {/* sorting buttons */}
       {/* <Link href={`${projectId}?sort=asc`}> Sort Ascending </Link> -{" "}
       <Link href={`${projectId}?sort=desc`}> Sort Descending </Link> */}

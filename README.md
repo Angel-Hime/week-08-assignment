@@ -37,8 +37,8 @@ REQUIREMENTS AND GOALS
     		--> you don't need to redirect after use comments
     		--> you can show the user that the thing has been posted
 
-    	- REDIRECT IS NOT A REQUIREMENT!
-    		--> redirect to post link if I do a 'add post' only
+    ✔️ - REDIRECT IS NOT A REQUIREMENT!
+    		--> redirect to projects list page after a new post is added
 
 
     FORM TO ADD BLOG POSTS
@@ -47,20 +47,19 @@ REQUIREMENTS AND GOALS
     🏹 Implement a select input (or similar mechanism) that allows users to categorise posts during creation, storing them in their own table in the database.
     Ensure appropriate routing for categories, with endpoints such as /categories and /categories/:id to enable users to browse and interact with posts by category.
 
-    	- checkbox
-    	- need to make
-
-    	- links to categories by id?
-
-
+    ✔️ - checkboxes
+    ✔️ - The form posts to two tables (project_blog table and project_features)
+    ✔️ - entry links to categories by entry_id
 
     🏹 Create an edit functionality accessible via /posts/:id/edit, which pre-fills a form for post data. Create a working PUT route to update the post in the database.
 
-    	-
+    	- consider that data from all tables would have to be amended in the case that the main post is edited
 
     🏹 Develop an edit comment feature accessible via /posts/:id/comments/:id/edit, which pre-fills a form for comment data. Create a working PUT route to update the comment in the database.
 
-    	-
+    	- look at the way that the delete button works with the value that was inserted from the comment_id
+
+        - If I decide to also categorise the comments consider that data from all tables would have to be deleted in the case that the main post is deleted
 
 SOURCES AND ATTRIBUTIONS
 
@@ -75,3 +74,5 @@ Home Logo - Code icons created by juicy_fish - Flaticon - https://www.flaticon.c
 Animated Home Logo - Programming language animated icons created by Freepik - Flaticon - https://www.flaticon.com/free-animated-icons/programming-language
 
 Date and Time Handling: https://www.freecodecamp.org/news/how-to-format-a-date-with-javascript-date-formatting-in-js/
+
+String Manipulation: https://www.freecodecamp.org/news/how-to-capitalize-words-in-javascript/
