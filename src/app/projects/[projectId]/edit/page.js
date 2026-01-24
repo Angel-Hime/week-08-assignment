@@ -1,24 +1,58 @@
 import { db } from "@/utils/dbConnection";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import Image from "next/image";
 
 export default async function editPost({ params }) {
   // get the post id
   const { projectId } = await params;
   // fetch the data for the post
   const projectQuery = (
-    await db.query(`SELECT * FROM project_blog WHERE entry_id = $1`, [
-      projectId,
-    ])
+    await db.query(
+      `SELECT project_blog.*, project_features.sql, project_features.tailwind, project_features.react, project_features.api FROM project_blog JOIN project_features ON project_blog.entry_id = project_features.entry_id WHERE project_blog.entry_id = $1`,
+      [projectId],
+    )
   ).rows;
   //   console.log(projectQuery);
   const entry = projectQuery[0];
   console.log(entry);
-  console.log(entry.entry_date.toLocaleDateString());
 
   // PUT route for updating the post
   async function handleSubmitEdit(rawFormData) {
     "use server";
     console.log(rawFormData);
+
+    console.log("Updating post...");
+
+    const { projectName, projectDate, url, description } =
+      Object.fromEntries(rawFormData);
+
+    const newProject = db.query(
+      `UPDATE project_blog SET entry_title = $1, entry_date = $2, screenshot_url = $3, entry_content = $4 WHERE entry_id = $5`,
+      [projectName, projectDate, url, description, projectId],
+    );
+
+    const { sql, tailwind, react, api } = Object.fromEntries(rawFormData);
+    console.log(sql);
+    console.log(tailwind);
+    console.log(react);
+    console.log(api);
+
+    db.query(
+      `UPDATE project_features SET sql = $1, tailwind = $2, react = $3, api = $4 WHERE entry_id = $5`,
+      [sql, tailwind, react, api, projectId],
+    );
+
+    console.log("Post updated!");
+
+    revalidatePath(`/projects/${projectId}`);
+    redirect(`/projects/${projectId}`);
   }
+  //   console.log("date: ");
+  //   console.log(entry.entry_date);
+  const formattedDate = entry.entry_date.toISOString().split("T")[0];
+  //   console.log("formatted date: ");
+  //   console.log(formattedDate);
 
   return (
     <>
@@ -30,32 +64,41 @@ export default async function editPost({ params }) {
           <input
             type="text"
             name="projectName"
-            placeholder="Provide a name for your project..."
             defaultValue={entry.entry_title}
           ></input>
 
-          <label htmlFor="projectDate">Project Date: </label>
+          <label htmlFor="projectDate">Project Date:</label>
           <input
             type="date"
             name="projectDate"
-            placeholder="Start or completion date"
-            defaultValue={entry.entry_date.toLocaleDateString("en-US")}
+            defaultValue={formattedDate}
           ></input>
 
           <label htmlFor="url">Project Screenshot</label>
-          {entry.entry_url ? (
-            <input
-              type="text"
-              name="url"
-              placeholder="Please provide a url for the project"
-              defaultValue={entry.entry_url}
-            ></input>
+          {entry.screenshot_url ? (
+            <>
+              {" "}
+              <input
+                type="url"
+                name="url"
+                defaultValue={entry.screenshot_url}
+              ></input>
+              <div>
+                <p>Image Provided: </p>
+                <Image
+                  src={entry.screenshot_url}
+                  alt={`submitted image for ${entry.entry_title}`}
+                  height={600}
+                  width={600}
+                />
+              </div>
+            </>
           ) : (
             <input
               type="text"
               name="url"
-              placeholder="Please provide a url for the project"
-              defaultValue={"No URL provided"}
+              placeholder="No URL provided, please provide..."
+              defaultValue={" "}
             ></input>
           )}
           {/* can I have the user upload an image straight to the bucket, so that I can use the url from there? 
@@ -74,16 +117,32 @@ export default async function editPost({ params }) {
             <legend className="ml-4">
               Specify What Features The Project Includes:{"  "}
             </legend>
-            <input type="checkbox" name="sql"></input>
+            <input
+              type="checkbox"
+              name="sql"
+              defaultChecked={entry.sql}
+            ></input>
             <label htmlFor="sql">SQL Database Work</label>
 
-            <input type="checkbox" name="tailwind"></input>
+            <input
+              type="checkbox"
+              name="tailwind"
+              defaultChecked={entry.tailwind}
+            ></input>
             <label htmlFor="tailwind">Tailwind CSS</label>
 
-            <input type="checkbox" name="react"></input>
+            <input
+              type="checkbox"
+              name="react"
+              defaultChecked={entry.react}
+            ></input>
             <label htmlFor="react">Built Using React</label>
 
-            <input type="checkbox" name="api"></input>
+            <input
+              type="checkbox"
+              name="api"
+              defaultChecked={entry.api}
+            ></input>
             <label htmlFor="api">Uses API(s)</label>
           </fieldset>
           <button type="submit"> Submit </button>

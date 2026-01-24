@@ -7,4 +7,11 @@ import { redirect } from "next/navigation";
 export default async function editComment({ params }) {
   const { projectId } = await params;
   const { commentId } = await params;
+  return (
+    <>
+      <h1>Edit User Comment</h1>
+      <p>{projectId}</p>
+      <p>{commentId}</p>
+    </>
+  );
 }

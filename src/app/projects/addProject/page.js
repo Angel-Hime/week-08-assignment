@@ -20,13 +20,6 @@ export default function addProject() {
     const newProjectId = newProjectIdWrangle[0];
     console.log(newProjectId.entry_id);
 
-    // const newProject = (
-    //   await db.query(
-    //     `SELECT * FROM project_blog WHERE entry_title = $1, entry_date = $2, screenshot_url = $3, entry_content = $4`,
-    //     [projectName, projectDate, url, description],
-    //   )
-    // ).rows;
-
     const { sql, tailwind, react, api } = Object.fromEntries(rawFormData);
     console.log(sql);
     console.log(tailwind);
@@ -64,7 +57,7 @@ export default function addProject() {
 
         <label htmlFor="url">Project Screenshot</label>
         <input
-          type="text"
+          type="url"
           name="url"
           placeholder="Please provide a url for the project"
         ></input>

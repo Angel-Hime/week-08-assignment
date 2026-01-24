@@ -118,9 +118,15 @@ export default async function dynamicProjectPage({ params, searchParams }) {
               <input
                 name="comment_id"
                 defaultValue={comment.comment_id}
+                type="hidden"
               ></input>
-              <button type="submit">Delete</button>
+              <button type="submit">Delete Comment</button>
             </form>
+            <Link
+              href={`${projectId}/comments/${comment.comment_id}/edit-comment`}
+            >
+              Edit Comment
+            </Link>
           </div>
         ))}
       </section>
@@ -135,7 +141,12 @@ export default async function dynamicProjectPage({ params, searchParams }) {
             <label className="bg-gray-100 text-gray-950" htmlFor="username">
               Name
             </label>
-            <input className="bg-gray-500" type="text" name="username" />
+            <input
+              className="bg-gray-500"
+              type="text"
+              name="username"
+              required
+            />
 
             <label className="bg-gray-100 text-gray-950" htmlFor="content">
               Post Content
@@ -147,6 +158,7 @@ export default async function dynamicProjectPage({ params, searchParams }) {
               rows="10"
               cols="30"
               placeholder="Enter your comment here..."
+              required
             />
             {/* below needs to be a radio so that I can categorise comments too */}
             {/* <label className="bg-gray-100 text-gray-950" htmlFor="category_id">

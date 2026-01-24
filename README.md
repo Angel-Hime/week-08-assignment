@@ -38,7 +38,7 @@ REQUIREMENTS AND GOALS
     		--> you can show the user that the thing has been posted
 
     ✔️ - REDIRECT IS NOT A REQUIREMENT!
-    		--> redirect to projects list page after a new post is added
+    		--> redirect to projects list page after a new post is added or a post is editted
 
 
     FORM TO ADD BLOG POSTS
@@ -53,13 +53,11 @@ REQUIREMENTS AND GOALS
 
     🏹 Create an edit functionality accessible via /posts/:id/edit, which pre-fills a form for post data. Create a working PUT route to update the post in the database.
 
-    	- consider that data from all tables would have to be amended in the case that the main post is edited
+    ✔️ - consider that data from all tables would have to be amended in the case that the main post is edited
 
     🏹 Develop an edit comment feature accessible via /posts/:id/comments/:id/edit, which pre-fills a form for comment data. Create a working PUT route to update the comment in the database.
 
-    	- look at the way that the delete button works with the value that was inserted from the comment_id
-
-        - If I decide to also categorise the comments consider that data from all tables would have to be deleted in the case that the main post is deleted
+       - If I decide to also categorise the comments consider that data from all tables would have to be deleted in the case that the main post is deleted
 
 SOURCES AND ATTRIBUTIONS
 
