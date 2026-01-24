@@ -57,6 +57,7 @@ export default async function editPost({ params }) {
   return (
     <>
       <h1>Edit Post: {projectId}</h1>
+      {/* link to return to post */}
       <section>
         {/* form with post content filled as value={content} */}
         <form action={handleSubmitEdit}>

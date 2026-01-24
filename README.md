@@ -57,6 +57,8 @@ REQUIREMENTS AND GOALS
 
     🏹 Develop an edit comment feature accessible via /posts/:id/comments/:id/edit, which pre-fills a form for comment data. Create a working PUT route to update the comment in the database.
 
+    ✔️ -
+
        - If I decide to also categorise the comments consider that data from all tables would have to be deleted in the case that the main post is deleted
 
 SOURCES AND ATTRIBUTIONS
