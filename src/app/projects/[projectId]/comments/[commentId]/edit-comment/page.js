@@ -36,25 +36,38 @@ export default async function editComment({ params }) {
   }
   return (
     <>
-      <fieldset className="grid justify-self-start">
+      <fieldset className="grid grid-rows-3 grid-cols-2 justify-self-start h-11/12 w-screen">
         <legend>Edit User Comment:</legend>
         <Link className={editCSS.return} href={`/projects/${projectId}`}>
           {" "}
           Return to Post
         </Link>
-        <form action={handleEditCommentForm}>
-          <label htmlFor="username">Name</label>
+        <form
+          action={handleEditCommentForm}
+          className="col-start-1 col-span-2 row-start-2 row-span-2 grid grid-cols-3"
+        >
+          <label
+            className="col-start-1 col-span-2 row-start-1 row-span-1 items-center"
+            htmlFor="username"
+          >
+            Name
+          </label>
           <input
-            className={editCSS.input}
+            className={`col-start-1 col-span-2 row-start-2 row-span-1 ${editCSS.input} mt-30 mb-30 ml-50 mr-50`}
             type="text"
             name="username"
             defaultValue={comment.username}
             required
           />
 
-          <label htmlFor="content">Post Content</label>
+          <label
+            className="col-start-3 col-span-2 row-start-1 row-span-1"
+            htmlFor="content"
+          >
+            Post Content
+          </label>
           <textarea
-            className={`${editCSS.input}`}
+            className={`col-start-3 col-span-2 row-start-2 row-span-1 ${editCSS.input} ml-30 mr-30 mt-10 mb-10`}
             type="text"
             name="content"
             rows="10"
@@ -80,7 +93,9 @@ export default async function editComment({ params }) {
               <option value={"2"}>2</option>
               <option value={"3"}>3</option>
             </select> */}
-          <button type="submit">submit</button>
+          <button className={editCSS.submit} type="submit">
+            submit
+          </button>
         </form>
       </fieldset>
     </>

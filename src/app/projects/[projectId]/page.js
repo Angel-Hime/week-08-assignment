@@ -103,7 +103,7 @@ export default async function dynamicProjectPage({ params, searchParams }) {
           <p>{entry.entry_title}</p>
           <p className="self-start ">Completion Date:</p>
           <p>{entry.entry_date.toLocaleDateString()}</p>
-          <p className="self-start ">Project Description:</p>
+          <p className="self-start ">Project Requirements & Stretch Goals:</p>
           <p className="mb-5 ">{entry.entry_content}</p>
 
           <Link
@@ -116,7 +116,7 @@ export default async function dynamicProjectPage({ params, searchParams }) {
 
         {/* comments section */}
         <fieldset className="row-start-1 row-end-4 col-start-3 col-end-5 flex flex-col overflow-scroll h-10/12">
-          <legend>Viewer Comments:</legend>
+          <legend>User Comments:</legend>
           {/* sorting buttons */}
           {/* <Link href={`${projectId}?sort=asc`}> Sort Ascending </Link> -{" "}
       <Link href={`${projectId}?sort=desc`}> Sort Descending </Link> */}
