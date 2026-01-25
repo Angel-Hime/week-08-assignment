@@ -3,6 +3,8 @@ import { db } from "@/utils/dbConnection";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
+import projectCSS from "@/app/projects/[projectId]/project.module.css";
+
 export default function addProject() {
   async function handleSubmit(rawFormData) {
     "use server";
@@ -38,9 +40,10 @@ export default function addProject() {
   }
   return (
     <>
-      <form action={handleSubmit}>
+      <form className="m-10 flex flex-col justify-center" action={handleSubmit}>
         <label htmlFor="projectName">Project Name: </label>
         <input
+          className={projectCSS.input}
           type="text"
           name="projectName"
           placeholder="Provide a name for your project..."
@@ -49,6 +52,7 @@ export default function addProject() {
 
         <label htmlFor="projectDate">Project Date: </label>
         <input
+          className={projectCSS.input}
           type="date"
           name="projectDate"
           placeholder="Start or completion date"
@@ -57,9 +61,10 @@ export default function addProject() {
 
         <label htmlFor="url">Project Screenshot</label>
         <input
+          className={projectCSS.input}
           type="url"
           name="url"
-          placeholder="Please provide a url for the project"
+          placeholder="Please provide a url for the project, or leave blank"
         ></input>
         {/* can I have the user upload an image straight to the bucket, so that I can use the url from there? 
         I would have to ensure that the url is still uploaded with
@@ -67,6 +72,7 @@ export default function addProject() {
 
         <label htmlFor="description">Project Description</label>
         <textarea
+          className={projectCSS.input}
           type="text"
           name="description"
           placeholder="Provide a description of the project"
@@ -77,19 +83,30 @@ export default function addProject() {
           <legend className="ml-4">
             Specify What Features The Project Includes:{"  "}
           </legend>
-          <input type="checkbox" name="sql"></input>
-          <label htmlFor="sql">SQL Database Work</label>
+          <input className="ml-3" type="checkbox" name="sql"></input>
+          <label className="ml-1" htmlFor="sql">
+            SQL Database Work
+          </label>
 
-          <input type="checkbox" name="tailwind"></input>
-          <label htmlFor="tailwind">Tailwind CSS</label>
+          <input className="ml-3" type="checkbox" name="tailwind"></input>
+          <label className="ml-1" htmlFor="tailwind">
+            Tailwind CSS
+          </label>
 
-          <input type="checkbox" name="react"></input>
-          <label htmlFor="react">Built Using React</label>
+          <input className="ml-3" type="checkbox" name="react"></input>
+          <label className="ml-1" htmlFor="react">
+            Built Using React
+          </label>
 
-          <input type="checkbox" name="api"></input>
-          <label htmlFor="api">Uses API(s)</label>
+          <input className="ml-3" type="checkbox" name="api"></input>
+          <label className="ml-1" htmlFor="api">
+            Uses API(s)
+          </label>
         </fieldset>
-        <button type="submit"> Submit </button>
+        <button className={`${projectCSS.links}   self-center `} type="submit">
+          {" "}
+          Submit{" "}
+        </button>
       </form>
     </>
   );

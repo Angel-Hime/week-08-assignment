@@ -8,9 +8,9 @@ export default function HeaderNav() {
     // --> image left
     // --> h1 center
     // --> page links right
-    <nav>
+    <header className="headerNav">
       {/* Image link for home page */}
-      <Link href={"/"}>
+      <Link className="homeLink" href={"/"}>
         <Image
           src={HomeImage}
           alt={"Navigate to the home page"}
@@ -18,12 +18,13 @@ export default function HeaderNav() {
           width={100}
         />
       </Link>
-      <h1>My Assignment Portfolio Blog</h1>
-
-      {/* Link for Blog page */}
-      <Link href={"/projects"}>Projects</Link>
-      {/* Link for About */}
-      <Link href={"/aboutMe"}>About Me</Link>
-    </nav>
+      <h1>MY ASSIGNMENT PORTFOLIO BLOG</h1>
+      <nav>
+        {/* Link for Blog page */}
+        <Link href={"/projects"}>Projects</Link>
+        {/* Link for About */}
+        <Link href={"/aboutMe"}>About Me</Link>
+      </nav>
+    </header>
   );
 }

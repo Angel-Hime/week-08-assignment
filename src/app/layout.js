@@ -1,16 +1,8 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import HeaderNav from "@/components/HeaderNav";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const robotoMono = Roboto_Mono({ subsets: ["latin"], weight: "variable" });
 
 export const metadata = {
   title: "Assignment Blog",
@@ -21,9 +13,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={robotoMono.className}>
         <HeaderNav />
         {children}
       </body>

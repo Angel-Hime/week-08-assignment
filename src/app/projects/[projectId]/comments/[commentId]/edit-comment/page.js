@@ -1,7 +1,8 @@
 import { db } from "@/utils/dbConnection";
 import { revalidatePath } from "next/cache";
+import Link from "next/link";
 import { redirect } from "next/navigation";
-
+import editCSS from "@/app/projects/[projectId]/edit/editProject.module.css";
 // TODO: Make a comment edit
 
 export default async function editComment({ params }) {
@@ -35,41 +36,34 @@ export default async function editComment({ params }) {
   }
   return (
     <>
-      {/* link to return to post */}
-      <p>{projectId}</p>
-      <p>{commentId}</p>
-      <section>
-        <form
-          action={handleEditCommentForm}
-          className="bg-gray-50 p-10 flex flex-col gap-2"
-        >
-          <fieldset>
-            <legend>Edit User Comment:</legend>
-            <label className="bg-gray-100 text-gray-950" htmlFor="username">
-              Name
-            </label>
-            <input
-              className="bg-gray-500"
-              type="text"
-              name="username"
-              defaultValue={comment.username}
-              required
-            />
+      <fieldset className="grid justify-self-start">
+        <legend>Edit User Comment:</legend>
+        <Link className={editCSS.return} href={`/projects/${projectId}`}>
+          {" "}
+          Return to Post
+        </Link>
+        <form action={handleEditCommentForm}>
+          <label htmlFor="username">Name</label>
+          <input
+            className={editCSS.input}
+            type="text"
+            name="username"
+            defaultValue={comment.username}
+            required
+          />
 
-            <label className="bg-gray-100 text-gray-950" htmlFor="content">
-              Post Content
-            </label>
-            <textarea
-              className="bg-gray-500"
-              type="text"
-              name="content"
-              rows="10"
-              cols="30"
-              defaultValue={comment.comment}
-              required
-            />
-            {/* below needs to be a radio so that I can categorise comments too */}
-            {/* <label className="bg-gray-100 text-gray-950" htmlFor="category_id">
+          <label htmlFor="content">Post Content</label>
+          <textarea
+            className={`${editCSS.input}`}
+            type="text"
+            name="content"
+            rows="10"
+            cols="30"
+            defaultValue={comment.comment}
+            required
+          />
+          {/* below needs to be a radio so that I can categorise comments too */}
+          {/* <label className="bg-gray-100 text-gray-950" htmlFor="category_id">
               Category
             </label>
             <select
@@ -86,15 +80,9 @@ export default async function editComment({ params }) {
               <option value={"2"}>2</option>
               <option value={"3"}>3</option>
             </select> */}
-            <button
-              className="bg-gray-300 text-gray-950 hover:bg-violet-400"
-              type="submit"
-            >
-              submit
-            </button>
-          </fieldset>
+          <button type="submit">submit</button>
         </form>
-      </section>
+      </fieldset>
     </>
   );
 }

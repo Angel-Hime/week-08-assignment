@@ -9,7 +9,7 @@ import { db } from "@/utils/dbConnection";
 import Image from "next/image";
 import Link from "next/link";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
+import projectCSS from "./project.module.css";
 
 export default async function dynamicProjectPage({ params, searchParams }) {
   const { projectId } = await params;
@@ -80,88 +80,107 @@ export default async function dynamicProjectPage({ params, searchParams }) {
 
   return (
     <>
-      {/* main image
-    content */}
-      <h2>{entry.entry_title}</h2>
-      {entry.screenshot_url ? (
-        <Image
-          src={entry.screenshot_url}
-          alt={`image showing the web app ${entry.entry_title}`}
-          width={500}
-          height={300}
-        />
-      ) : (
-        <h2>
-          {" "}
-          Image not provide, click here to navigate to project{" "}
-          {entry.entry_title}
-        </h2>
-      )}
-      <p>{entry.entry_content}</p>
-      <p>{entry.entry_date.toLocaleDateString()}</p>
-      <Link href={`/projects/${entry.entry_id}/edit`}>Edit Post</Link>
-      {/* sorting buttons */}
-      {/* <Link href={`${projectId}?sort=asc`}> Sort Ascending </Link> -{" "}
+      <section className="grid grid-cols-4 grid-rows-6 m-10 h-9/12 overflow-hidden items-center">
+        <div className="row-start-1 col-start-1 row-end-4 col-end-3 justify-self-center self-center">
+          {entry.screenshot_url ? (
+            <Image
+              src={entry.screenshot_url}
+              alt={`image showing the web app ${entry.entry_title}`}
+              width={700}
+              height={300}
+            />
+          ) : (
+            <h2>
+              {" "}
+              Image not provide, click edit to update project: &quot;
+              {entry.entry_title}&quot;
+            </h2>
+          )}
+        </div>
+
+        <main className="row-start-4 row-end-7 col-start-1 col-end-3 self-baseline-last justify-self-center flex flex-col items-center overflow-scroll h-11/12">
+          <p className="self-start ">Project Title: </p>
+          <p>{entry.entry_title}</p>
+          <p className="self-start ">Completion Date:</p>
+          <p>{entry.entry_date.toLocaleDateString()}</p>
+          <p className="self-start ">Project Description:</p>
+          <p className="mb-5 ">{entry.entry_content}</p>
+
+          <Link
+            className={projectCSS.links}
+            href={`/projects/${entry.entry_id}/edit`}
+          >
+            Edit Post
+          </Link>
+        </main>
+
+        {/* comments section */}
+        <fieldset className="row-start-1 row-end-4 col-start-3 col-end-5 flex flex-col overflow-scroll h-10/12">
+          <legend>Viewer Comments:</legend>
+          {/* sorting buttons */}
+          {/* <Link href={`${projectId}?sort=asc`}> Sort Ascending </Link> -{" "}
       <Link href={`${projectId}?sort=desc`}> Sort Descending </Link> */}
-      <section>
-        {comments.map((comment) => (
-          <div key={comment.comment_id}>
-            <p>Comment ID: {comment.comment_id}</p>
-            <p>{comment.username}</p>
-
-            <p>Date: {comment.comment_date.toLocaleString("en-UK")} </p>
-            <p>{comment.comment}</p>
-            {/* <Link href={`/projects/${projectId}/${comment.comment_id}`}>
-              Delete
-            </Link> */}
-            <form action={handleDelete}>
-              <input
-                name="comment_id"
-                defaultValue={comment.comment_id}
-                type="hidden"
-              ></input>
-              <button type="submit">Delete Comment</button>
-            </form>
-            <Link
-              href={`${projectId}/comments/${comment.comment_id}/edit-comment`}
+          {comments.map((comment) => (
+            <div
+              className="flex flex-col gap-2 items-center"
+              key={comment.comment_id}
             >
-              Edit Comment
-            </Link>
-          </div>
-        ))}
-      </section>
-      {/* comments form */}
-      <section>
-        <form
-          action={handleSavePostForm}
-          className="bg-gray-50 p-10 flex flex-col gap-2"
-        >
-          <fieldset>
-            <legend>Leave A Comment:</legend>
-            <label className="bg-gray-100 text-gray-950" htmlFor="username">
-              Name
-            </label>
-            <input
-              className="bg-gray-500"
-              type="text"
-              name="username"
-              required
-            />
+              <p>
+                {comment.username} -{" "}
+                {comment.comment_date.toLocaleString("en-UK")}{" "}
+              </p>
+              <p>&quot;{comment.comment}&quot;</p>
 
-            <label className="bg-gray-100 text-gray-950" htmlFor="content">
-              Post Content
-            </label>
-            <textarea
-              className="bg-gray-500"
-              type="text"
-              name="content"
-              rows="10"
-              cols="30"
-              placeholder="Enter your comment here..."
-              required
-            />
-            {/* below needs to be a radio so that I can categorise comments too */}
-            {/* <label className="bg-gray-100 text-gray-950" htmlFor="category_id">
+              <form action={handleDelete}>
+                <input
+                  name="comment_id"
+                  defaultValue={comment.comment_id}
+                  type="hidden"
+                />
+                <button className={projectCSS.links} type="submit">
+                  Delete Comment
+                </button>
+              </form>
+              <Link
+                className={projectCSS.links}
+                href={`${projectId}/comments/${comment.comment_id}/edit-comment`}
+              >
+                Edit Comment
+              </Link>
+            </div>
+          ))}
+        </fieldset>
+
+        {/* comments form */}
+        <section className="row-start-4 row-end-7 col-start-3 col-end-5 self-center overflow-scroll mt-10 mb-10">
+          <form action={handleSavePostForm}>
+            <fieldset className="flex flex-col items-center  gap-2">
+              <legend>Leave A Comment:</legend>
+              <label className="" htmlFor="username">
+                Name
+              </label>
+              <input
+                className={projectCSS.input}
+                type="text"
+                name="username"
+                placeholder="Enter your name..."
+                required
+              />
+
+              <label className="" htmlFor="content">
+                Post Content
+              </label>
+              <textarea
+                className={`  ${projectCSS.input} overflow-scroll max-h-20 min-h-20`}
+                type="text"
+                name="content"
+                rows="5"
+                cols="75"
+                placeholder="Enter your comment here..."
+                required
+              />
+              {/* below needs to be a radio so that I can categorise comments too */}
+              {/* <label className="bg-gray-100 text-gray-950" htmlFor="category_id">
               Category
             </label>
             <select
@@ -178,14 +197,12 @@ export default async function dynamicProjectPage({ params, searchParams }) {
               <option value={"2"}>2</option>
               <option value={"3"}>3</option>
             </select> */}
-            <button
-              className="bg-gray-300 text-gray-950 hover:bg-violet-400"
-              type="submit"
-            >
-              submit
-            </button>
-          </fieldset>
-        </form>
+              <button className={projectCSS.links} type="submit">
+                submit
+              </button>
+            </fieldset>
+          </form>
+        </section>
       </section>
     </>
   );

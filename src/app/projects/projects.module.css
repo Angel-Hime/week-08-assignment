@@ -1,0 +1,40 @@
+.asideLinks {
+  width: 75%;
+  padding: 1rem;
+  border-radius: 5px;
+  border: 0.1px solid #e549d5c1;
+  /* border: 0.1px solid #32eee16f; */
+}
+.asideLinks:hover {
+  box-shadow:
+    -0.5em 0em 0.4em #e549d5c1,
+    0.5em 0em 0.4em #e549d5c1;
+}
+
+.mainFeature {
+  grid-column: 2/6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 70vh;
+  border: 0.1px solid #e549d5c1;
+  /* border: 0.1px solid #32eee16f; */
+  gap: 5vh;
+  padding-top: 4vh;
+  padding-bottom: 4vh;
+}
+
+.imageDiv {
+  padding: 1rem;
+  border-radius: 5px;
+  border: 0.1px solid #e549d5c1;
+  /* border: 0.1px solid #32eee16f; */
+}
+
+.imageDiv:hover {
+  box-shadow:
+    -0.5em 0em 0.4em #e549d5c1,
+    0.5em 0em 0.4em #e549d5c1;
+}
