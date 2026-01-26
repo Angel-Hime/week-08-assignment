@@ -11,7 +11,7 @@ body {
   display: grid;
   text-align: center;
   scroll-behavior: smooth;
-  overflow: hidden;
+  overflow: scroll;
 }
 
 .headerNav {
