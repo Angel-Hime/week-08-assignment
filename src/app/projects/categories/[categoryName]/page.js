@@ -22,7 +22,7 @@ export default async function categoriesFilter({ params }) {
           {projects.map((project) => (
             <div key={project.entry_id}>
               {" "}
-              <h2> {project.entry_title} </h2>
+              
               <Link href={`/projects/${project.entry_id}`}>
                 {project.screenshot_url ? (
                   <Image
